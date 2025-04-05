@@ -1,30 +1,45 @@
-﻿using Newtonsoft.Json;
+﻿using Questao2.Services;
 
 public class Program
 {
-    public static void Main()
+    private const string API_URL = "https://jsonmock.hackerrank.com/api/football_matches";
+
+    public static async Task Main()
     {
-        string teamName = "Paris Saint-Germain";
-        int year = 2013;
-        int totalGoals = getTotalScoredGoals(teamName, year);
+        var httpClient = new HttpClient();
 
-        Console.WriteLine("Team "+ teamName +" scored "+ totalGoals.ToString() + " goals in "+ year);
+        var footballService = new FootballMatchService(httpClient, API_URL);
 
-        teamName = "Chelsea";
-        year = 2014;
-        totalGoals = getTotalScoredGoals(teamName, year);
+        await RunExample(footballService, "Paris Saint-Germain", 2013);
 
-        Console.WriteLine("Team " + teamName + " scored " + totalGoals.ToString() + " goals in " + year);
+        await RunExample(footballService, "Chelsea", 2014);
+    }
 
-        // Output expected:
-        // Team Paris Saint - Germain scored 109 goals in 2013
-        // Team Chelsea scored 92 goals in 2014
+    private static async Task RunExample(IFootballMatchService service, string teamName, int year)
+    {
+        try
+        {
+            int totalGoals = await service.GetTotalScoredGoalsByTeamAsync(teamName, year);
+            Console.WriteLine($"Team {teamName} scored {totalGoals} goals in {year}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro no processamento em team {teamName}: {ex.Message}");
+        }
     }
 
     public static int getTotalScoredGoals(string team, int year)
     {
-        
-        return 0;
+        var httpClient = new HttpClient();
+        var service = new FootballMatchService(httpClient, API_URL);
+        return service.GetTotalScoredGoalsByTeamAsync(team, year).Result;
     }
 
+    public static async Task<int> getTotalScoredGoalsAsync(string team, int year)
+    {
+        var httpClient = new HttpClient();
+        var service = new FootballMatchService(httpClient, API_URL);
+        return await service.GetTotalScoredGoalsByTeamAsync(team, year);
+    }
 }
+
