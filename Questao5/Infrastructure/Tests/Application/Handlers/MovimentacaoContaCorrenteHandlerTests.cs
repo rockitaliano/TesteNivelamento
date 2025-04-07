@@ -72,12 +72,12 @@ namespace Questao5.Infrastructure.Tests.Application.Handlers
 
             // mock para retornar uma conta inativa
             var contaInativa = new ContaCorrente
-            {
-                IdContaCorrente = "1",
-                Numero = 123,
-                Nome = "Conta Teste",
-                Ativo = false
-            };
+            (
+                idContaCorrente: "1",
+                numero: 123,
+                nome: "Conta Teste",
+                ativo: false
+            );
             _contaCorrenteRepository.ObterPorIdAsync(request.IdContaCorrente).Returns(contaInativa);
 
             // Act
@@ -104,12 +104,12 @@ namespace Questao5.Infrastructure.Tests.Application.Handlers
 
             // Mock para retornar uma conta ativa
             var contaAtiva = new ContaCorrente
-            {
-                IdContaCorrente = "1",
-                Numero = 123,
-                Nome = "Conta Teste",
-                Ativo = true
-            };
+            (
+                idContaCorrente: "1",
+                numero: 123,
+                nome: "Conta Teste",
+                ativo: true
+            );
             _contaCorrenteRepository.ObterPorIdAsync(request.IdContaCorrente).Returns(contaAtiva);
 
             // Act
@@ -136,12 +136,12 @@ namespace Questao5.Infrastructure.Tests.Application.Handlers
 
             // Mock para retornar uma conta ativa
             var contaAtiva = new ContaCorrente
-            {
-                IdContaCorrente = "1",
-                Numero = 123,
-                Nome = "Conta Teste",
-                Ativo = true
-            };
+            (
+                idContaCorrente: "1",
+                numero: 123,
+                nome: "Conta Teste",
+                ativo: true
+            );
             _contaCorrenteRepository.ObterPorIdAsync(request.IdContaCorrente).Returns(contaAtiva);
 
             // Act
@@ -167,12 +167,12 @@ namespace Questao5.Infrastructure.Tests.Application.Handlers
             };
 
             var contaAtiva = new ContaCorrente
-            {
-                IdContaCorrente = "1",
-                Numero = 123,
-                Nome = "Conta Teste",
-                Ativo = true
-            };
+            (
+                idContaCorrente: "1",
+                numero: 123,
+                nome: "Conta Teste",
+                ativo: true
+            );
             _contaCorrenteRepository.ObterPorIdAsync(request.IdContaCorrente).Returns(contaAtiva);
 
             // Configurando o mock para simular a inserção do movimento
